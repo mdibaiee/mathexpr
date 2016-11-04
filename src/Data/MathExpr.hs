@@ -1,3 +1,4 @@
+{-# Language ScopedTypeVariables #-}
 module Data.MathExpr
     ( evaluate
     , Settings (..)
@@ -6,7 +7,6 @@ module Data.MathExpr
     ) where
       import Data.Default.Class
       import Data.Maybe (isJust, fromJust)
-      import Debug.Trace
       import Data.List (find)
 
       data Settings = Settings { operators :: [(Char, Int, Double -> Double -> Double)]
@@ -78,9 +78,13 @@ module Data.MathExpr
           fns = functions settings
 
           helper :: [String] -> [String] -> Double
+          -- negative numbers come in the form ["num", "-"]
           helper [] [o] = read o
           helper (c:cs) os
-            | isOperator c =
+            | c == "-" && length os < 2 =
+                let result :: Double = negate . read . head $ cs
+                in helper (tail cs) $ (show result) : os
+            | isOperator c && length os >= 2 =
                 let result = (operatorFunction c) (read . head . tail $ os) (read . head $ os) 
                 in helper cs $ (show result) : drop 2 os
             | isFunction c =
