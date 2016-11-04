@@ -1,4 +1,4 @@
-mathexpr
+mathexpr [![Travis](https://img.shields.io/travis/mdibaiee/mathexpr.svg)]()
 ========
 Ever wanted to take as input a mathematical expression to fill in values and use it? `mathexpr` is exactly what you need.
 
