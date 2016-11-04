@@ -1,5 +1,5 @@
 {-# Language ScopedTypeVariables #-}
-module Data.MathExpr
+module Numeric.MathExpr
     ( evaluate
     , Settings (..)
     , defaultFunctions
