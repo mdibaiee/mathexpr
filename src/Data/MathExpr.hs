@@ -80,6 +80,7 @@ module Data.MathExpr
           helper :: [String] -> [String] -> Double
           -- negative numbers come in the form ["num", "-"]
           helper [] [o] = read o
+          helper [n, "-"] [] = negate . read $ n
           helper (c:cs) os
             | c == "-" && length os < 2 =
                 let result :: Double = negate . read . head $ cs
