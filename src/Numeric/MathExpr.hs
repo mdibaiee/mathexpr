@@ -9,15 +9,26 @@ module Numeric.MathExpr
       import Data.Maybe (isJust, fromJust)
       import Data.List (find)
 
+      -- | Operators are in the form (character, precedence, function)
+      -- Example: ('+', 0, (+)), ('', 1, ())
+      -- (higher the precedence, the sooner the operator operates)
+      --
+      -- Functions are in the form (name, function)
+      -- Example: ("ln", log)
       data Settings = Settings { operators :: [(Char, Int, Double -> Double -> Double)]
                                , functions :: [(String, Double -> Double)]
                                }
-
+      -- | Operators are in the form (character, precedence, function)
+      -- Example: ('+', 0, (+)), ('', 1, ())
+      -- (higher the precedence, the sooner the operator operates)
       defaultOperators = [
           ('+', 0, (+)), ('-', 0, (-)),
           ('*', 1, (*)), ('/', 1, (/)),
           ('^', 2, (**))
         ]
+
+      -- | Functions are in the form (name, function)
+      -- Example: ("ln", log)
       defaultFunctions = [("ln", log), ("sin", sin), ("cos", cos)]
 
       instance Default Settings where
