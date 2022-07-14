@@ -73,7 +73,7 @@ module Numeric.MathExpr
         where
           replace c
             | isVariable c = pad $ show $ fromJust $ c `lookup` vars
-            | otherwise = c
+            | otherwise = pad c
 
           isVariable c = isJust $ c `lookup` vars
 
